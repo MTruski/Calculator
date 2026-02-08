@@ -1,73 +1,8 @@
--- functions
-local function exit_application(should_exit)
-  if should_exit then
-      os.exit()
-  end
-end
-
-local function do_add()
-    print("Enter number")
-    local n1 = io.read()
-    print("Enter a second number")
-    local n2 = io.read()
-    return (n1+n2)
-end
-
-local function do_sub()
-    print("Enter number")
-    local n1 = io.read()
-    print("Enter a second number")
-    local n2 = io.read()
-    return (n1-n2)
-end
-
-local function do_multi()
-    print("Enter number")
-    local n1 = io.read()
-    print("Enter a second number")
-    local n2 = io.read()
-    return (n1 * n2)
-end
-
-local function do_div()
-    print("Enter number")
-    local n1 = io.read()
-    print("Enter a second number")
-    local n2 = io.read()
-    return (n1 / n2)
-end
-
-local function do_square()
-    print("Enter number")
-    local n1 = io.read()
-    return (n1 * n1 )
-end
-
-local function do_square_root()
-    print("Enter number")
-    local n1 = io.read()
-    return math.sqrt(n1)
-end
-
-local function do_operation(input)
-  if input == "1" then
-    return do_add()
-  elseif input == "2" then
-    return do_sub()
-  elseif input == "3" then
-    return do_multi()
-  elseif input == "4" then
-    return do_div()
-  elseif input == "5" then
-    return do_square()
-  elseif input == "6" then
-    return do_square_root()
-  end
-end
+local Operations = require ("operations")
 
 local function main_menu()
   local should_exit = false
-  while not exit_application(should_exit) do
+  while not Operations.exit_application(should_exit) do
     print("See the menu below and enter a number")
     print("1. Addition")
     print("2. Subtraction")
@@ -82,7 +17,7 @@ local function main_menu()
     if number == "0" then
       should_exit = true
     elseif number ~= nil then
-      local output = do_operation(number)
+      local output = Operations.do_operation(number)
       print("your result is " .. (output or "NaN"))
     end
   end
