@@ -1,9 +1,10 @@
 -- functions
-local function exit_application(input)
-    if input == "0" then
-        os.exit()
-    end
+local function exit_application(should_exit)
+  if should_exit then
+      os.exit()
+  end
 end
+
 local function do_add()
     print("Enter number")
     local n1 = io.read()
@@ -65,8 +66,8 @@ local function do_operation(input)
 end
 
 local function main_menu()
-  local input = nil
-  while not exit_application(input) do
+  local should_exit = false
+  while not exit_application(should_exit) do
     print("See the menu below and enter a number")
     print("1. Addition")
     print("2. Subtraction")
@@ -78,8 +79,8 @@ local function main_menu()
     local number = io.read()
     print("You chose " .. number)
     print("")
-    if (number == "0") then
-      input = "0"
+    if number == "0" then
+      should_exit = true
     elseif number ~= nil then
       local output = do_operation(number)
       print("your result is " .. (output or "NaN"))
@@ -87,10 +88,4 @@ local function main_menu()
   end
 end
 
--- program
-
---while not should_exit_application() do
-  -- variables
-  -- functions
-  main_menu()
---end
+main_menu()
