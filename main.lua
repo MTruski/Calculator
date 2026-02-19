@@ -2,6 +2,8 @@ local Calculator = require('src.calculator')
 local Colors = require('src.colors')
 local Draw = require('src.draw')
 
+local calculator_width = 1000
+local calculator_height = 800
 
 function love.load()
     love.window.setMode(calculator_width,calculator_height,{fullscreen = false, resizable = true})
@@ -13,8 +15,9 @@ end
 
 function love.draw()
     Draw.diag_grid()
-    Draw.main_buttons()
-    Draw.operation_buttons()
+    Draw.buttons()
+    --Draw.main_buttons()
+    --Draw.operation_buttons()
     -- general box
     love.graphics.setLineWidth(3)
     love.graphics.setColor(Colors.purple)
@@ -23,7 +26,7 @@ function love.draw()
     love.graphics.setLineWidth(1)
 
     -- display box
-    love.graphics.rectangle("fill", 110, 110, 580, 80)
+    love.graphics.rectangle("fill", 125, 110, 565, 80)
 
     -- display text
     love.graphics.setColor(Colors.blue)
@@ -56,7 +59,7 @@ function love.keypressed(key)
 end
 
 function love.resize(w, h)
-    window_width = w
-    window_height = h
+    Draw.window_width = w
+    Draw.window_height = h
     -- handle user resizing window
 end

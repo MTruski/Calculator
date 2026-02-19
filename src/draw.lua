@@ -2,85 +2,61 @@ local Draw = {}
 local Colors = require('src.colors')
 
 -- Variables
-
 local window_width, window_height = love.window.getDesktopDimensions()
-local calculator_width = 1000
-local calculator_height = 800
+
+local main_numpad_starting_x = 125
+local main_numpad_starting_y = 312.5
+local operations_starting_x = 725
+local operations_starting_y = 212.5
+local width = 150
+local height = 75
+local x_gutter = 50
+local y_gutter = 25
 
 local operations = {
-    [0] = "0",
-    [1] = "1",
-    [2] = "2",
-    [3] = "3",
-    [4] = "4",
-    [5] = "5",
-    [6] = "6",
-    [7] = "7",
-    [8] = "8",
-    [9] = "9",
-    [10] = "+",
-    [11] = "-",
-    [12] = "*",
-    [13] = "/",
-    [14] = "=",
-    [15] = "√",
-    [16] = "x²"
+    [1] = "%",
+    [2] = "√",
+    [3] = "x²",
+    [4] = "/",
+    [5] = "1",
+    [6] = "2",
+    [7] = "3",
+    [8] = "*",
+    [9] = "4",
+    [10] = "5",
+    [11] = "6",
+    [12] = "-",
+    [13] = "7",
+    [14] = "8",
+    [15] = "9",
+    [16] = "+",
+    [17] = "Clear",
+    [18] = "0",
+    [19] = "•",
+    [20] = "="
 
 }
 
 -- Functions
 
-function Draw.operation_buttons()
-    local starting_x = 725
-    local starting_y = 212.5
-    local x = starting_x
-    local y = starting_y
-    local width = 150
-    local height = 75
-    local x_gutter = 50
-    local y_gutter = 25
-    for i = 1, 5, 1 do
+function Draw.buttons()
+
+    local x = 125
+    local y = 212.5
+    for i = 1, 20, 1 do
         -- sets default rectangle constructor and color
         love.graphics.rectangle("fill", x, y, width, height)
         love.graphics.setColor(Colors.purple)
         love.graphics.print(operations[i],(x +(width/2)), (y +(height/2)),nil,nil,nil,5,5)
         love.graphics.setColor(Colors.white)
-        y = (y+height) + y_gutter
+        x = (x+width) + x_gutter
+        if i % 4 == 0 then
+            y = (y+height) + y_gutter
+            x = main_numpad_starting_x
+        end
     end
 end
 
-function Draw.main_buttons()
-    local starting_x = 125
-    local starting_y = 312.5
-    local x = starting_x
-    local y = starting_y
-    local width = 150
-    local height = 75
-    local x_gutter = 50
-    local y_gutter = 25
-    
-    for i = 1, 12, 1 do
-        -- sets default rectangle constructor and color
-        love.graphics.rectangle("fill", x, y, width, height)
-        love.graphics.setColor(Colors.purple)
-        -- print corresponding symbols on the main num pad as well as clear and decimal
-       -- if i < 10 then
-            love.graphics.print(operations[i],(x +(width/2)), (y +(height/2)),nil,nil,nil,5,5)
-       -- elseif i == 10 then
-       --     love.graphics.print("Clear",(x +(width/2)), (y +(height/2)),nil,nil,nil,15,5)
-      --  elseif i == 11 then
-        --    love.graphics.print("0",(x +(width/2)), (y +(height/2)),nil,nil,nil,5,5)
-     --   else
-       --     love.graphics.print("•",(x +(width/2)), (y +(height/2)))
-        --end
-        love.graphics.setColor(Colors.white)
-        x = (x+width) + x_gutter
-        if i % 3 == 0 then
-            y = (y+height) + y_gutter
-            x = starting_x
-        end
-    end 
-end
 -- Function to help with aligning the design
 function Draw.diag_grid()
     love.graphics.setColor(Colors.dark_grey)
