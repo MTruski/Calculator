@@ -1,8 +1,10 @@
-local Operations = require("operations")
+local Operations = require("src.operations")
+
+local Calculator = {}
 
 local all_operations = Operations.get_all_operations()
 
-local function main_menu()
+function Calculator.main_menu()
   -- a rolling total
   local output = 0
 
@@ -19,4 +21,4 @@ local function main_menu()
   end
 end
 
-main_menu()
+return Calculator
