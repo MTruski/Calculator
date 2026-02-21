@@ -1,23 +1,22 @@
 local Calculator = require('src.calculator')
 local Colors = require('src.colors')
 local Draw = require('src.draw')
+local Buttons = require('src.buttons')
+local Input = require('src.input')
 
 local calculator_width = 1000
 local calculator_height = 800
 
 function love.load()
-    love.window.setMode(calculator_width,calculator_height,{fullscreen = false, resizable = true})
-    --Calculator.main_menu()
     -- load up everything once before drawing
+    love.window.setMode(calculator_width, calculator_height, { fullscreen = false, resizable = true })
+    Buttons.init()
 end
-
-
 
 function love.draw()
     Draw.diag_grid()
     Draw.buttons()
-    --Draw.main_buttons()
-    --Draw.operation_buttons()
+    
     -- general box
     love.graphics.setLineWidth(3)
     love.graphics.setColor(Colors.purple)
@@ -27,11 +26,6 @@ function love.draw()
 
     -- display box
     love.graphics.rectangle("fill", 125, 110, 565, 80)
-
-    -- display text
-    love.graphics.setColor(Colors.blue)
-    love.graphics.print("test",150, 130)
-    love.graphics.setColor(Colors.white)
 end
 
 function love.update(dt)
@@ -39,7 +33,12 @@ function love.update(dt)
 end
 
 function love.mousepressed(x, y, button, istouch)
-    -- handle mouse presses
+    if button == 1 and (x >= 565 and x <= 565 + 645 and y >= 80 and y <= 110 + 80) then
+        love.graphics.setColor(Colors.blue)
+        love.graphics.print("test", 50, 50)
+        love.graphics.setColor(Colors.white)
+        --idea- Maybe can calculate the size of the button and tie it to the i?
+    end
 end
 
 function love.mousereleased(x, y, button, istouch)
