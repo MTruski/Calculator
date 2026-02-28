@@ -42,15 +42,15 @@ function Buttons.init()
     local x = start_x
     local y = start_y
 
-    print("drawing buttons - starting x pos: " .. x .. "starting y pos: " .. y)
+    --print("drawing buttons - starting x pos: " .. x .. "starting y pos: " .. y)
 
     for i, operation in ipairs(operations) do
-        print("New button created at x: " .. x .. "and y: " .. y .. "for: " .. operation)
+        --print("New button created at x: " .. x .. "and y: " .. y .. "for: " .. operation)
         local new_button = Buttons.new(operation, x, y, width, height)
         x = (x + width) + x_gutter
         -- updates position for new row
         if i % 4 == 0 then
-            print("New row with coordinates x: " .. x .. "and y: " .. y)
+            -- print("New row with coordinates x: " .. x .. "and y: " .. y)
             y = (y + height) + y_gutter
             x = start_x
         end
@@ -67,6 +67,23 @@ function Buttons.new(label, x, y, width, height)
     self.width = width
     self.height = height
     return self
+end
+
+function Buttons:released(x, y, button)
+    if button ~= 1 then return false end -- or 2 if right-click
+
+    local inside =
+        x >= self.x and
+        x <= self.x + self.width and
+        y >= self.y and
+        y <= self.y + self.height
+
+    if inside then
+        print("Yatzhee")
+        return true
+    end
+
+    return false
 end
 
 function Buttons:draw()

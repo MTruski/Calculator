@@ -17,7 +17,7 @@ function love.draw()
     Draw.diag_grid()
     Draw.buttons()
     
-    -- general box
+    -- general box, temporary for display
     love.graphics.setLineWidth(3)
     love.graphics.setColor(Colors.purple)
     love.graphics.rectangle("line", 100, 100, 800, 600)
@@ -29,24 +29,21 @@ function love.draw()
 end
 
 function love.update(dt)
+    
     -- update everything
 end
 
 function love.mousepressed(x, y, button, istouch)
-    if button == 1 and (x >= 565 and x <= 565 + 645 and y >= 80 and y <= 110 + 80) then
-        love.graphics.setColor(Colors.blue)
-        love.graphics.print("test", 50, 50)
-        love.graphics.setColor(Colors.white)
-        --idea- Maybe can calculate the size of the button and tie it to the i?
-    end
+    Input.pressed_button(x, y, button, istouch)
 end
 
 function love.mousereleased(x, y, button, istouch)
-    -- handle mouse releases
+    Input.released_button(x, y, button)
 end
 
 function love.mousemoved(x, y, dx, dy)
-    -- handle mouse movements
+    --lua not ready yet, used for testing position of the mouse 
+    --Input.detect_movement(x, y, dx, dy)
 end
 
 function love.wheelmoved(x, y)
